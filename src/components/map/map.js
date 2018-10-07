@@ -1,7 +1,6 @@
 /* global google */
 
 import React,{PureComponent} from 'react';
-import {withGoogleMap,GoogleMap,Marker,Polyline,DirectionsRenderer} from "react-google-maps";
 import Controls from '../controls/controls';
 import MapWithAMarker from './mapted'
 import RideDetails from '../ridedetails.js/RideDetails';
@@ -26,7 +25,7 @@ class Map extends PureComponent{
     }
     setTheLocation=(location)=>{
         console.log("HEre");
-        console.log(location)
+        console.log(location.destination)
         this.setState({
             default:[
                 { lat:location.startingPoint[0].lat, lng:location.startingPoint[0].lang}
@@ -42,7 +41,7 @@ class Map extends PureComponent{
         })
         if(this.state.startingPoint && this.state.endingPoint){
             const roadDetails=[...this.state.roadDetails];
-            roadDetails.push({"source":this.state.startingPoint,"destination":this.state.endingPoint})
+            roadDetails.push({"source":location.origin,"destination":location.destination});
             this.setState({
                 loadMap:true,
                 roadDetails
@@ -84,8 +83,8 @@ class Map extends PureComponent{
                 setTheLocation={this.state}
                 directions={this.state.directions}
                 pathFinder={this.state.pathFinder}
-                />):(<div><h1>Choose the origin and destination</h1></div>)}
-                {this.state.roadDetails.length?(<RideDetails roadDetails={this.state.roadDetails}/>):(<div><p>No details</p></div>)}
+                />):(<div className="center"><h1>Choose the origin and destination</h1></div>)}
+                {this.state.roadDetails.length?(<div style={{marginTop:'60px'}}><h1>Recently searched locaions !</h1><RideDetails roadDetails={this.state.roadDetails}/></div>):(null)}
                 
             </div>
         )

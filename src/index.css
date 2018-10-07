@@ -21,4 +21,15 @@ body {
   cursor: pointer;
   margin: 5px;
 }
-/*  */
+.highlighter{
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 2px;
+}
+.button-center {
+  margin-left: 25%;}
+  .center{
+    text-align: center;
+  }

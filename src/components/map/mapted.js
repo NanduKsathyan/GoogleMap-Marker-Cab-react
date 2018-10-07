@@ -47,7 +47,6 @@ class  MapWithAMarker extends Component{
       defaultZoom={12}
       defaultCenter={{ lat: this.props.setTheLocation.defaultPoint[0].lat, lng: this.props.setTheLocation.defaultPoint[0].lng }}
     >
-    {/* {this.props.directions && <DirectionsRenderer directions={this.props.directions} />} */}
     <Polyline 
                path={this.props.pathFinder}
                 geodesic={true}

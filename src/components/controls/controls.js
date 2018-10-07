@@ -10,47 +10,40 @@ class controls extends PureComponent {
     destination:null
   }
 
-  onSuggestSelect=({location})=>{
+  onSuggestSelect=(info)=>{
     console.log("This is the sorce")
-    console.log(location);
+    console.log(info);
     this.setState({
       startingPoint:[
-        {lat:location.lat,lang:location.lng}
-      ]
+        {lat:info.location.lat,lang:info.location.lng}
+      ],
+      origin:info.label
     })
   }
-  onSuggestSelectDes=({location})=>{
+  onSuggestSelectDes=(info)=>{
     console.log("This is the destination");
-    console.log(location);
+    console.log(info);
     this.setState({
       endingPoint:[
-        {lat:location.lat,lang:location.lng}
-      ]
+        {lat: info.location.lat,lang: info.location.lng}
+      ],
+      destination:info.label
     })
   }
   handleInput=(e)=>{
     e.preventDefault();
     console.log(this.state);
     
-    //this.props.setTheLocation(this.state);
-  }
-  handleChange=(e)=>{
-    //const journeyData=[...this.state.journeyData];
-    // journeyData.push({origin:e.target.source.value,destination:e.target.destination.value});
-    // console.log("journeyData");
-    // console.log(journeyData);
-    this.setState({
-      [e.target.name]:e.target.value
-    })
+    this.props.setTheLocation(this.state);
   }
   render() {
     return (
         <div>
           <form onSubmit={this.handleInput}> 
-            <Geosuggest onSuggestSelect={this.onSuggestSelect} name="starting" id="origin" onChange={this.handleChange} placeholder="Enter your Starting point"/>
+            <Geosuggest onSuggestSelect={this.onSuggestSelect}  name="starting" id="origin"  placeholder="Enter your Starting point"/>
             <Geosuggest onSuggestSelect={this.onSuggestSelectDes} name="ending" id="destination" placeholder="Enter your Ending point"/>
-            <div className="center">
-              <button className="button" onClick={this.handleInput}><span>Load Map </span></button>
+            <div className="wrapper">
+              <button className="button button-center" onClick={this.handleInput}><span>Load Map </span></button>
               </div>
           </form>
           
